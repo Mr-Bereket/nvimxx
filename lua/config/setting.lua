@@ -30,3 +30,16 @@ vim.keymap.set({"i","n"},"<C-q>", "<Esc>:q<CR>", { noremap = true, silent = true
 
 vim.keymap.set({"i","n"},"<C-o>", "<Esc>:Neotree toggle<CR>", { noremap = true, silent = true })
 
+vim.keymap.set({"i","n"}, '<A-e>', vim.lsp.buf.code_action, { desc = "LSP Code Actions" })
+vim.keymap.set({"i","n"}, '<C-e>', function()
+  vim.diagnostic.open_float(nil,{focusable = false})
+end, { desc = "Show line diagnostics" })
+
+vim.diagnostic.config({
+  update_in_insert = true, -- This is the magic line
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})
